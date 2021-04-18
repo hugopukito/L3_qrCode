@@ -4,15 +4,18 @@ public class matrice {
 
     private final int taille;
     private final int [][] matrice;
+    private String data;
 
     /* Constructeur simple pour récupérer la matrice
        et la taille de cette matrice depuis le main. */
 
-    public matrice(int [][] matrice, int taille)
+    public matrice(int [][] matrice, int taille, String data)
     {
         System.out.println("Création matrice");
+        System.out.println();
         this.matrice = matrice;
         this.taille = taille;
+        this.data = data;
     }
 
 
@@ -115,6 +118,80 @@ public class matrice {
                 matrice[i][6] = 0;
             }
         }
+    }
+
+    /* Permet de remplir la matrice des données fournies */
+
+    public void DonneesMatrice ()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            for (int j = 8; j < taille-8; j++)
+            {
+                if (i != 6)
+                {
+                    matrice[i][j] = 2;
+                }
+            }
+        }
+
+        for (int i = 8; i < taille-8; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (j != 6)
+                {
+                    matrice[i][j] = 3;
+                }
+            }
+        }
+
+        for (int i = 8; i < taille; i++)
+        {
+            for (int j = 8; j < taille; j++)
+            {
+                matrice[i][j] = 4;
+            }
+        }
+    }
+
+    public void Data()
+    {
+        StringConvert DataBit = new StringConvert(data);
+
+        // convertion String en bit
+        String StringBit = DataBit.strToBinary();
+
+        // convertion String en Ascii
+        int [] StringAscii = DataBit.strToAscii();
+
+        // création données pour code reed-solomon
+        int add = 0;
+        int addmult = 0;
+
+        for (int i : StringAscii) {
+            add += i;
+        }
+
+        for (int i = 0; i < StringAscii.length; i++)
+        {
+            addmult += (i+1)*StringAscii[i];
+        }
+
+        // convertion String (tous le chiffre) en bit
+        String finalAdd;
+        StringToBinary addbin = new StringToBinary(add);
+        finalAdd = addbin.StringEnBit();
+
+        String finalAddMult;
+        StringToBinary addmultbin = new StringToBinary(addmult);
+        finalAddMult = addmultbin.StringEnBit();
+
+        StringBit += finalAdd;
+        StringBit += finalAddMult;
+
+        data = StringBit;
+        System.out.println(data);
     }
 
     /* Simple méthode pour afficher la matrice proprement. */
