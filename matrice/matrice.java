@@ -4,7 +4,7 @@ public class matrice {
 
     private final int taille;
     private final int [][] matrice;
-    private String data;
+    private final String data;
 
     /* Constructeur simple pour récupérer la matrice
        et la taille de cette matrice depuis le main. */
@@ -155,8 +155,87 @@ public class matrice {
         }
     }
 
-    public void Data()
+    /* Coupe la chaîne de caractère des données en bloc de 3 pour appliquer le
+       code de Reed-Solomon sur tous ces blocs, cette partie du code va aussi
+       gérer si la String n'est pas divisible par 3 pour pouvoir rajouter un bloc
+       de 1 ou un bloc de 2 quand on ne peut pas rajouter le dernier bloc de 3.
+       A chaque bloc de 3, on utilise le partie de code "Data" qui concatène nos
+       données en binaires et ajoute 2 bloc de code correcteur, quand on a fini
+       de traiter toute la String on peut renvoyer la grosse donnée finale qui
+       prends tous les blocs (données + correcteurs) et les concatènes */
+
+    public String SplitData()
     {
+        int crs = 0;
+        char [] DataArray = new char[data.length()];
+        String FinalData = "";
+
+        for (int i=0; i < data.length(); i++)
+        {
+            DataArray[i] = data.charAt(i);
+        }
+
+        while (crs < DataArray.length)
+        {
+            String tempData = "";
+
+            if (DataArray.length %3 == 0)
+            {
+                for (int i=0; i<3; i++)
+                {
+                    tempData += DataArray[crs];
+                    crs += 1;
+                }
+                FinalData += Data(tempData);
+            }
+
+            else if (DataArray.length %3 == 1)
+            {
+                if (crs == DataArray.length - 1)
+                {
+                    tempData += DataArray[crs];
+                    crs += 1;
+                    FinalData += Data(tempData);
+                }
+                else
+                {
+                    for (int i=0; i<3; i++)
+                    {
+                        tempData += DataArray[crs];
+                        crs += 1;
+                    }
+                    FinalData += Data(tempData);
+                }
+            }
+
+            else if (DataArray.length %3 == 2)
+            {
+                if (crs == DataArray.length - 2)
+                {
+                    tempData += DataArray[crs];
+                    tempData += DataArray[crs];
+                    crs += 2;
+                    FinalData += Data(tempData);
+                }
+                else
+                {
+                    for (int i=0; i<3; i++)
+                    {
+                        tempData += DataArray[crs];
+                        crs += 1;
+                    }
+                    FinalData += Data(tempData);
+                }
+            }
+        }
+        System.out.println(FinalData);
+        return FinalData;
+    }
+
+    public String Data(String data)
+    {
+        /* chaque donnée sera sur 7 bits, on a rajouter les 0 manquants dans
+           la classe StringConvert */
         StringConvert DataBit = new StringConvert(data);
 
         // convertion String en bit
@@ -178,20 +257,44 @@ public class matrice {
             addmult += (i+1)*StringAscii[i];
         }
 
-        // convertion String (tous le chiffre) en bit
+        // Convertion String (tous le chiffre) en bit
+
+        // L'addition
         String finalAdd;
         StringToBinary addbin = new StringToBinary(add);
         finalAdd = addbin.StringEnBit();
 
+        // Ici on s'assure que l'on est toujours sur 9 bits pour l'addition
+
+        if (finalAdd.length() != 9)
+        {
+            while(finalAdd.length() != 9)
+            {
+                finalAdd = 0 + finalAdd;
+            }
+        }
+
+        // L'addition avec coefficients
         String finalAddMult;
         StringToBinary addmultbin = new StringToBinary(addmult);
         finalAddMult = addmultbin.StringEnBit();
+
+        // Ici on s'assure que l'on est toujours sur 10 bits pour l'addition avec coefficients
+
+        if (finalAddMult.length() != 10)
+        {
+            while (finalAddMult.length() != 10)
+            {
+                finalAddMult = 0 + finalAddMult;
+            }
+        }
 
         StringBit += finalAdd;
         StringBit += finalAddMult;
 
         data = StringBit;
-        System.out.println(data);
+
+        return data;
     }
 
     /* Simple méthode pour afficher la matrice proprement. */

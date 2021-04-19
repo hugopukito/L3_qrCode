@@ -35,9 +35,17 @@ public class StringConvert
                 val /= 2;
             }
             bin = reverse(bin);
+            if (bin.length() != 7)
+            {
+                for (int j=0; j <= 7 - bin.length(); j++)
+                {
+                    bin = 0 + bin;
+                }
+            }
 
             bitFinal += bin;
         }
+
         return bitFinal;
     }
 

@@ -10,7 +10,7 @@ public class Main {
         int [][] m = new int [taille][taille];
 
         // constructeur de base
-        matrice matrice1 = new matrice(m, taille, "pukito");
+        matrice matrice1 = new matrice(m, taille, "pukito22");
 
         // méthodes pour la construction de la matrice
         matrice1.InitMatrice();
@@ -18,6 +18,6 @@ public class Main {
         matrice1.PiloteDeTailleMatrice();
         matrice1.DonneesMatrice();
         matrice1.AffichageMatrice();
-        matrice1.Data();
+        matrice1.SplitData();
     }
 }
