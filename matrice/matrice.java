@@ -18,6 +18,11 @@ public class matrice {
         this.data = data;
     }
 
+    public int [][] getMatrice()
+    {
+        return matrice;
+    }
+
 
     /* Méthode permettant d'initialiser la matrice proprement avec
        des bits aléatoires pour le remplissage des données. */
@@ -130,7 +135,7 @@ public class matrice {
             {
                 if (i != 6)
                 {
-                    matrice[i][j] = 2;
+                    matrice[i][j] = (int)Math.round( Math.random() ) ;
                 }
             }
         }
@@ -141,7 +146,7 @@ public class matrice {
             {
                 if (j != 6)
                 {
-                    matrice[i][j] = 3;
+                    matrice[i][j] = (int)Math.round( Math.random() );
                 }
             }
         }
@@ -150,7 +155,7 @@ public class matrice {
         {
             for (int j = 8; j < taille; j++)
             {
-                matrice[i][j] = 4;
+                matrice[i][j] = (int)Math.round( Math.random() );
             }
         }
     }
