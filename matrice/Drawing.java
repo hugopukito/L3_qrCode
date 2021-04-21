@@ -37,17 +37,24 @@ public class Drawing extends JComponent
         {
             for (int j=0; j<taille; j++)
             {
-                if (matrice[i][j]==0)
+                if(matrice[i][j]==0)
                 {
-                    g2d.setColor(new Color(250, 101, 101));
-                    r3[i][j] = new Rectangle2D.Double(i*25,j*25,25,25);
+                    g2d.setColor(new Color(255, 244, 144));
+                    r3[i][j] = new Rectangle2D.Double(j*25,i*25,25,25);
                     /*(10*50+i,10*50+j,50,50)*/
                     g2d.fill(r3[i][j]);
                 }
-                else if(matrice[i][j]==1)
+                if (matrice[i][j]==1)
                 {
-                    g2d.setColor(new Color(255, 244, 144));
-                    r3[i][j] = new Rectangle2D.Double(i*25,j*25,25,25);
+                    g2d.setColor(new Color(250, 101, 101));
+                    r3[i][j] = new Rectangle2D.Double(j*25,i*25,25,25);
+                    /*(10*50+i,10*50+j,50,50)*/
+                    g2d.fill(r3[i][j]);
+                }
+                if(matrice[i][j]==2)
+                {
+                    g2d.setColor(new Color(144, 255, 242));
+                    r3[i][j] = new Rectangle2D.Double(j*25,i*25,25,25);
                     /*(10*50+i,10*50+j,50,50)*/
                     g2d.fill(r3[i][j]);
                 }

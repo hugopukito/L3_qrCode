@@ -5,6 +5,7 @@ public class matrice {
     private final int taille;
     private final int [][] matrice;
     private final String data;
+    private String binaryData;
 
     /* Constructeur simple pour récupérer la matrice
        et la taille de cette matrice depuis le main. */
@@ -125,37 +126,100 @@ public class matrice {
         }
     }
 
+    /* Calcule la taille libre dans la matrice pour mettre nos données */
+
+    public int calcDonnees ()
+    {
+        int tailleDispo = (taille*taille) - (8*8*3) - ((taille-16)*2);
+        return tailleDispo;
+    }
+
+    public String longueurDonnees()
+    {
+        String dataLength = "";
+
+        dataLength = Integer.toBinaryString(SplitData().length()*2);
+
+        if (dataLength.length() != 15)
+        {
+            while(dataLength.length() != 15)
+            {
+                dataLength = 0 + dataLength;
+            }
+        }
+
+        return dataLength;
+    }
+
+    public String FinalDataEncoded ()
+    {
+        binaryData = longueurDonnees() + SplitData() + SplitData();
+        System.out.println(binaryData);
+        System.out.println(binaryData.length());
+
+        return binaryData;
+    }
+
     /* Permet de remplir la matrice des données fournies */
 
     public void DonneesMatrice ()
     {
+        int cpt = 0;
+
+        // Bloc de données milieu haut
         for (int i = 0; i < 8; i++)
         {
             for (int j = 8; j < taille-8; j++)
             {
                 if (i != 6)
                 {
-                    matrice[i][j] = (int)Math.round( Math.random() ) ;
+                    if (cpt < binaryData.length())
+                    {
+                        matrice[i][j] = binaryData.charAt(cpt) - 48;
+                        cpt++;
+                    }
+                    else
+                    {
+                        matrice[i][j] = 2;
+                    }
                 }
             }
         }
 
+        // Bloc de données milieu gauche
         for (int i = 8; i < taille-8; i++)
         {
             for (int j = 0; j < 8; j++)
             {
                 if (j != 6)
                 {
-                    matrice[i][j] = (int)Math.round( Math.random() );
+                    if (cpt < binaryData.length())
+                    {
+                        matrice[i][j] = binaryData.charAt(cpt) - 48;
+                        cpt++;
+                    }
+                    else
+                    {
+                        matrice[i][j] = 2;
+                    }
                 }
             }
         }
 
+        // Bloc de données bas droite
         for (int i = 8; i < taille; i++)
         {
             for (int j = 8; j < taille; j++)
             {
-                matrice[i][j] = (int)Math.round( Math.random() );
+                if (cpt < binaryData.length())
+                {
+                    matrice[i][j] = binaryData.charAt(cpt) - 48;
+                    cpt++;
+                }
+                else
+                {
+                    matrice[i][j] = 2;
+                }
             }
         }
     }
@@ -233,7 +297,6 @@ public class matrice {
                 }
             }
         }
-        System.out.println(FinalData);
         return FinalData;
     }
 
