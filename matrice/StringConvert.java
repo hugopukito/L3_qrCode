@@ -1,9 +1,8 @@
 package matrice;
-import java.util.*;
 
 public class StringConvert
 {
-    private String s;
+    private final String s;
 
     public StringConvert(String s)
     {
@@ -14,39 +13,39 @@ public class StringConvert
     public String strToBinary()
     {
         int n = s.length();
-        String bitFinal = "";
+        StringBuilder bitFinal = new StringBuilder();
 
         for (int i = 0; i < n; i++)
         {
             // convert each char to
             // ASCII value
-            int val = Integer.valueOf(s.charAt(i));
+            int val = s.charAt(i);
 
             // Convert ASCII value to binary
-            String bin = "";
+            StringBuilder bin = new StringBuilder();
             while (val > 0)
             {
                 if (val % 2 == 1)
                 {
-                    bin += '1';
+                    bin.append('1');
                 }
                 else
-                    bin += '0';
+                    bin.append('0');
                 val /= 2;
             }
-            bin = reverse(bin);
+            bin = new StringBuilder(reverse(bin.toString()));
             if (bin.length() != 7)
             {
                 for (int j=0; j <= 7 - bin.length(); j++)
                 {
-                    bin = 0 + bin;
+                    bin.insert(0, 0);
                 }
             }
 
-            bitFinal += bin;
+            bitFinal.append(bin);
         }
 
-        return bitFinal;
+        return bitFinal.toString();
     }
 
     /* convertis ma donnée (String) en tableau d'entiers contenant le code
@@ -60,7 +59,7 @@ public class StringConvert
         {
             // convert each char to
             // ASCII value
-            int val = Integer.valueOf(s.charAt(i));
+            int val = s.charAt(i);
 
             AsciiFinal[i] = val;
         }
@@ -71,7 +70,7 @@ public class StringConvert
     public String reverse(String input)
     {
         char[] a = input.toCharArray();
-        int l, r = 0;
+        int l, r;
         r = a.length - 1;
 
         for (l = 0; l < r; l++, r--)

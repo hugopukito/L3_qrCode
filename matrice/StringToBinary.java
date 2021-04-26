@@ -2,7 +2,7 @@ package matrice;
 
 public class StringToBinary
 {
-    private Integer valeur;
+    private final Integer valeur;
 
     public StringToBinary(Integer valeur)
     {
@@ -11,9 +11,8 @@ public class StringToBinary
 
     public String StringEnBit()
     {
-        Integer newValeur = Integer.valueOf(String.valueOf(valeur));
-        String chiffreBinaire=Integer.toBinaryString(newValeur.intValue());
+        int newValeur = Integer.parseInt(String.valueOf(valeur));
 
-        return chiffreBinaire;
+        return Integer.toBinaryString(newValeur);
     }
 }
