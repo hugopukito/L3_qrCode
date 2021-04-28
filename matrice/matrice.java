@@ -42,8 +42,7 @@ public class matrice {
        que l'on veut encoder dans cette matrice.
        La plus petite matrice étant de taille 21*21 et la plus grande 177*177. */
 
-    public int TailleMatrice()
-    {
+    public int TailleMatrice() throws DataLengthException {
         int finalTaille = 21;
 
         while (binaryData.length() > calcDonnees(finalTaille))
@@ -54,7 +53,7 @@ public class matrice {
             }
             else
             {
-                System.out.println("Taille de la donnée trop grande");
+                throw new DataLengthException(finalTaille + 4);
             }
         }
 
@@ -82,8 +81,7 @@ public class matrice {
     /* Concatène la longueur de la donnée avec deux fois la donnée pour former
        la donnée finale que l'on mettra dans la matrice. */
 
-    public void FinalDataEncoded()
-    {
+    public void FinalDataEncoded() throws DataLengthException {
         binaryData = longueurDonnees() + SplitData() + SplitData();
         System.out.println(binaryData);
         System.out.println(binaryData.length());

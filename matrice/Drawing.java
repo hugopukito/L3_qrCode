@@ -31,7 +31,6 @@ public class Drawing extends JComponent
                     g2d.setColor(new Color(255, 244, 144));
                     r3[i][j] = new Rectangle2D.Double(j*taillePixel,i*taillePixel,
                             taillePixel,taillePixel);
-                    /*(10*50+i,10*50+j,50,50)*/
                     g2d.fill(r3[i][j]);
                 }
                 if (matrice[i][j]==1)
@@ -39,7 +38,6 @@ public class Drawing extends JComponent
                     g2d.setColor(new Color(250, 101, 101));
                     r3[i][j] = new Rectangle2D.Double(j*taillePixel,i*taillePixel,
                             taillePixel,taillePixel);
-                    /*(10*50+i,10*50+j,50,50)*/
                     g2d.fill(r3[i][j]);
                 }
                 if(matrice[i][j]==2)
@@ -47,7 +45,6 @@ public class Drawing extends JComponent
                     g2d.setColor(new Color(144, 255, 242));
                     r3[i][j] = new Rectangle2D.Double(j*taillePixel,i*taillePixel,
                             taillePixel,taillePixel);
-                    /*(10*50+i,10*50+j,50,50)*/
                     g2d.fill(r3[i][j]);
                 }
             }
