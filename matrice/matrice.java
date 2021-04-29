@@ -7,8 +7,7 @@ public class matrice {
     private final String data;
     private String binaryData;
 
-    /* Constructeur simple pour récupérer la matrice
-       et la taille de cette matrice depuis le main. */
+    /* Constructeur simple pour donner la donnée à notre objet matrice */
 
     public matrice(String data)
     {
@@ -47,7 +46,7 @@ public class matrice {
 
         while (binaryData.length() > calcDonnees(finalTaille))
         {
-            if (finalTaille <= 177)
+            if (finalTaille < 177)
             {
                 finalTaille += 4;
             }
