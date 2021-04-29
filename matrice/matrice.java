@@ -47,7 +47,7 @@ public class matrice {
 
         while (binaryData.length() > calcDonnees(finalTaille))
         {
-            if (finalTaille <= 177)
+            if (finalTaille < 177)
             {
                 finalTaille += 4;
             }
