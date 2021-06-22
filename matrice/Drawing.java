@@ -3,8 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
 
-public class Drawing extends JComponent
-{
+public class Drawing extends JComponent{
     private final int taille;
     private final int [][] matrice;
     private final int taillePixel;
